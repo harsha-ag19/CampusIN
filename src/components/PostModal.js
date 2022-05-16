@@ -7,7 +7,7 @@ const PostModal = (props) => {
               <h2>
                   Create a post</h2>
                   <button>
-                      <img src="" alt="delete-icon"/>
+                      <img src="/images/close.png" alt="delete-icon"/>
                   </button>
          </Header>
          <SharedContent>
@@ -50,7 +50,7 @@ const Header=styled.div`
 
 display:block;
 padding:16px 20px;
-border-bottom:1px solid rgba(0,0,0,0,0.15);
+border-bottom:1px solid rgba(0,0,0,0.15);
 font-size:16px;
 line-height:1.5;
 color:rgba(0,0,0,0.6);
@@ -65,7 +65,11 @@ button
     width:40px;
     min-width:auto;
     color:rgba(0,0,0,0.15);
-    svg{
+    img{
+        margin-left: -7px;
+        margin-top: -2px;
+        widht:50px;
+        height:40px;
         pointer-events:none;
     }
 }
@@ -87,13 +91,12 @@ const UserInfo=styled.div`
 display:flex;
 align_item:center;
 padding:12px 24px;
-
-png ,img
+img
 {
     width:48px;
     height:48px;
     background-clip:content-box;
-    border-radius:50%;
+    border-radius:2px solid transparent;
     border:2px solid transparent;
 }
 
@@ -106,8 +109,7 @@ span
     margin-left:5px;
 }
 `;
-const SharedCreation= styled.div
-`
+const SharedCreation= styled.div`
 display:flex;
 justify-content:space-between;
 padding:12px 24px 12px 16px;
