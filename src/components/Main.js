@@ -1,8 +1,62 @@
+import React from 'react';
 import { useState } from "react";
 import styled from "styled-components";
 import PostModal from "./PostModal";
+import axios from "axios";
+import Card from "./Card";
+
+
+// "_id": "627ebb6a9b92d90c5ba77d04",
+// "userId": "71",
+// "contents": "This is my testing post.",
+// "upvotes": [],
+// "downvotes": [],
+// "comments": [],
+// "createdAt": "2022-05-13T20:11:22.410Z",
+// "updatedAt": "2022-05-13T20:11:22.410Z",
+// "__v": 0
+function createCard(currentCard)
+{
+     return(
+      <Card 
+
+    key={currentCard._id}
+    name={currentCard.userId}
+    content={currentCard.contents}
+    upvote={currentCard.upvotes}
+    downvote={currentCard.downvotes}
+    createdat={currentCard.createdAt}
+    updatedAt={currentCard.updatedAt}  
+      
+      
+      
+      
+      />
+
+    
+     );
+}
+
 const Main = (props) => {
     const [showModal , setShowModal] = useState("close");
+    const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get('https://campusin.herokuapp.com/api/post')
+  .then(function (response) {
+    // handle success
+    console.log("hi");
+    setPost(response.data);
+    console.log("bye");
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  }, []);
+
+  if (!post) return null;
+
     const handleClick = (e) => {
         e.preventDefault();
         if(e.target!==e.currentTarget){
@@ -55,53 +109,8 @@ const Main = (props) => {
       </ShareBox>
 
       <div>
-          <Article>
-             <SharedActor>
-                 <a>
-                     <button>
-                     <img src="/images/ellipsis.png" alt=""></img>
-                     </button>
-                 </a>
-
-             </SharedActor>
-           <Description>Description</Description>
-           <SharedImg>
-               <a>
-                   <img src="/images/scenery.png" alt=""/>
-               </a>
-           </SharedImg>
-           <SocialCount>
-               <li>
-                   <button>
-                   <img src="/images/like.png"  width="50px" height="30px" alt="">
-                   </img>
-                   <img src="/images/clapping.png"  width="50px" height="30px" alt=""/>
-                   <span>75</span>
-                   </button>
-               </li>
-               <li>
-                   <a>2 comments</a>
-               </li>
-           </SocialCount>
-           <SocialActions>
-           <button>
-               <img src="/images/like.png" width="50px" height="30px" alt=""/>
-               <span>Like</span>
-           </button>
-           <button>
-               <img src="/images/comment.png" width="50px" height="30px"  alt=""/>
-               <span>Comment</span>
-           </button>
-           <button>
-               <img src="/images/share.png" width="50px" height="30px"  alt=""/>
-               <span>Share</span>
-           </button>
-           <button>
-               <img src="/images/send.png" width="50px" height="30px"  alt=""/>
-               <span>Send</span>
-           </button>
-           </SocialActions>
-          </Article>
+          
+         { post.map(createCard)}
       </div>
 
     <PostModal showModal={showModal} handleClick={handleClick}/>
