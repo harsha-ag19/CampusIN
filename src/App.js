@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Tmp from "./components/Tmp";
 import { getUserAuth } from './actions';
-//import Header from "./components/Header"
-//import Login from "./components/Login"
+
 import Home from "./components/Home";
 import { useEffect } from "react";
 import { connect } from 'react-redux';
