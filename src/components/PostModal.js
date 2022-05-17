@@ -32,8 +32,12 @@ const PostModal = (props) => {
 
     const postArticle=(e)=>
     {
+        console.log("post alone");
         e.preventDefault();
-        if(e.target!=e.currentTarget)return ;
+        if(e.target!==e.currentTarget){
+            console.log("hello");
+            return;
+        } ;
 
         const payload ={
             image:shareImage,
@@ -45,7 +49,7 @@ const PostModal = (props) => {
 
         props.postArticle(payload);
         reset(e);
-    }
+    };
     const reset = (e) => {
         setEditorText("");
         setShareImage("");
@@ -68,7 +72,8 @@ const PostModal = (props) => {
          <SharedContent>
          <UserInfo>
          {props.user.photoURL ? <img src={props.user.photoURL}/>:<img width="20%" height="20%"src="/images/user.png" alt=""/>}
-         <span>{props.user.displayName}</span></UserInfo>
+         <span>{props.user.displayName}</span>
+         </UserInfo>
          <Editor>
         <textarea value={editorText} onChange={(e) => setEditorText(e.target.value)}
         placeholder="What do you want to talk about?"
@@ -81,9 +86,12 @@ const PostModal = (props) => {
             style={{display:"none"}}
             onChange={handleChange}/>
             <p>
-                <label htmlFor='file'>Select an image to share</label>
+                <label htmlFor='file'>Share image</label>
             </p>
-            {shareImage && (<img src={URL.createObjectURL(shareImage)}/>)}</UploadImage>):(assetArea==="media"&& 
+            {shareImage && <img src={URL.createObjectURL(shareImage)}/>}
+            </UploadImage>):
+            assetArea==="media" && (
+             
             <>
             <input type="text"
             placeholder='Share Video'
@@ -91,10 +99,11 @@ const PostModal = (props) => {
             onChange={(e)=>setVideoLink(e.target.value)}
             />
             {videoLink&&(<ReactPlayer width={'100%'} url={videoLink}/>)}
+           
+              </>)
+}
 
-            </>
-)}
-        
+
         </Editor>
          </SharedContent>
          <SharedCreation>
@@ -112,7 +121,10 @@ const PostModal = (props) => {
                  Anyone
              </AssetButton>
              </ShareComment>
-             <PostButton disabled={!editorText ? true:false } onClick={(event)=>postArticle(event)}>Post</PostButton>
+             <PostButton disabled={!editorText ? true:false } 
+             onClick={(event)=>postArticle(event)}>
+                 Post
+              </PostButton>
          </SharedCreation>
          </Content>
  </Container>}
