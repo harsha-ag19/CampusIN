@@ -1,5 +1,18 @@
 import styled from "styled-components";
 import { connect } from "react-redux";
+// const axios = require('axios').default;
+// const fetchName =() =>
+// {
+//   axios.get('https://campusin.herokuapp.com/api/user?email=emailID')
+//                .then(function (response) {
+//                  // handle success
+//                 console.log(response)
+//                 })
+//                 .catch(function (error) {
+//                   // handle error
+//                     console.log(error)
+//                  })
+// }
 const Leftside = (props) => {
   return (
     <Container>
@@ -17,6 +30,7 @@ const Leftside = (props) => {
         <Widget>
           <a>
             <div>
+              
               <span>Name</span>
               <span>Branch</span>
               <span>Year</span>
@@ -59,6 +73,7 @@ const Leftside = (props) => {
 
 const Container = styled.div`
   grid-area: leftside;
+  position:fixed;
 `;
 
 const ArtCard = styled.div`
