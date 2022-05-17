@@ -2,7 +2,17 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
-
+const axios = require('axios').default;
+axios.get('https://campusin.herokuapp.com/api/post')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+ 
 
 const PostModal = (props) => {
     const [editorText , setEditorText] = useState("");
